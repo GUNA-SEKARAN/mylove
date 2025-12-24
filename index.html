@@ -45,6 +45,19 @@ h1{color:#e91e63;margin-bottom:20px}
   margin-top:20px;
 }
 
+/* play button */
+#playBtn{
+  display:none;
+  margin-top:20px;
+  padding:12px 25px;
+  font-size:16px;
+  border:none;
+  border-radius:30px;
+  background:#e91e63;
+  color:white;
+  cursor:pointer;
+}
+
 /* floating hearts */
 .heart{
   position:absolute;
@@ -66,6 +79,7 @@ h1{color:#e91e63;margin-bottom:20px}
   <h1 id="name"></h1>
   <div id="letter"></div>
   <div id="finalLine">Nee illama naan illa ❤️</div>
+  <button id="playBtn">Tap to feel my love ❤️</button>
 </div>
 
 <!-- 🎵 Background Song -->
@@ -114,17 +128,25 @@ function typeWriter(){
     i++;
     setTimeout(typeWriter, speed);
   } else {
-    setTimeout(startEmotion, 1200);
+    setTimeout(showEmotion, 1200);
   }
 }
 typeWriter();
 
-/* song starts after emotion */
-function startEmotion(){
+/* show final + enable music */
+function showEmotion(){
   document.getElementById("finalLine").style.display = "block";
+  const btn = document.getElementById("playBtn");
   const music = document.getElementById("bgMusic");
-  music.volume = 0.5;
-  music.play();
+
+  btn.style.display = "inline-block";
+
+  btn.addEventListener("click", () => {
+    music.volume = 0.6;
+    music.play();
+    btn.innerText = "Music playing ❤️";
+    btn.disabled = true;
+  });
 }
 
 /* hearts */
